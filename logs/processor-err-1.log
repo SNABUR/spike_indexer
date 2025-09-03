@@ -362,3 +362,8 @@
 2025-09-02T16:39:52: }
 2025-09-02T16:39:52: 
 2025-09-02T16:39:52: Node.js v20.17.0
+2025-09-03T15:14:08: [processor-worker] ERROR: Error processing jobs: {"code":"P2028","meta":{"error":"Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5127 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction."},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
+2025-09-03T15:14:09: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
+2025-09-03T15:14:11: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
+2025-09-03T15:14:12: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
+2025-09-03T15:14:13: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}

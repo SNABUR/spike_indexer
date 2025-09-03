@@ -390,3 +390,9 @@
 2025-09-02T16:39:52: }
 2025-09-02T16:39:52: 
 2025-09-02T16:39:52: Node.js v20.17.0
+2025-09-03T15:09:30: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TransferEvent on https://rpc-mainnet.supra.com/rpc/v1: 
+2025-09-03T15:12:03: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TradeEvent on https://rpc-mainnet.supra.com/rpc/v1: 
+2025-09-03T15:12:29: [rpcClient] ERROR: Error fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1: {}
+2025-09-03T15:12:29: [poller] ERROR: [supra-mainnet] Error fetching latest block height: HTTP error! status: 408 from https://rpc-mainnet.supra.com/rpc/v1
+2025-09-03T15:13:14: [rpcClient] ERROR: Error fetching latest block height from https://rpc-testnet.supra.com/rpc/v1: {}
+2025-09-03T15:13:14: [poller] ERROR: [supra-testnet] Error fetching latest block height: HTTP error! status: 408 from https://rpc-testnet.supra.com/rpc/v1

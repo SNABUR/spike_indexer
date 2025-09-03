@@ -1,7 +1,7 @@
 import { createLogger } from './indexer/utils';
 import cron from 'node-cron';
 import queuePrismadb from '../lib/queue-prismadb';
-import prismadb from '../lib/queue-prismadb';
+import prismadb from '../lib/main_prismadb'; 
 import { processEvents } from './indexer/eventProcessor';
 import { RpcEvent } from './indexer/types';
 
@@ -23,31 +23,37 @@ async function processQueue() {
   logger.info(`Processing ${jobs.length} jobs from the queue.`);
 
   const events = jobs.map(job => job.payload as any as RpcEvent);
+  const jobIds = jobs.map(job => job.id);
 
   try {
+    // --- FASE 1: Lógica de Negocio Principal ---
+    // Ejecutamos el trabajo pesado en la base de datos principal, dentro de su propia transacción.
     await prismadb.$transaction(async (tx) => {
       await processEvents(events, events[0].network, tx);
     });
 
-    await queuePrismadb.job.updateMany({
-      where: {
-        id: {
-          in: jobs.map(job => job.id),
-        },
-      },
-      data: {
-        processed: true,
-      },
-    });
+    // --- FASE 2: Actualización de la Cola ---
+    // Solo si la Fase 1 tuvo éxito, procedemos a marcar los trabajos como completados.
+    try {
+      await queuePrismadb.job.updateMany({
+        where: { id: { in: jobIds } },
+        data: { processed: true },
+      });
+      logger.info(`Successfully processed and marked ${jobs.length} jobs as complete.`);
+      
+    } catch (queueError) {
+      // Este es un caso raro pero importante: el trabajo se hizo, pero no pudimos
+      // marcarlo en la cola. Se registrará un error crítico y los trabajos se
+      // volverán a procesar en el futuro (por eso `processEvents` debe ser idempotente).
+      logger.error('CRITICAL: Business logic succeeded, but failed to mark jobs as processed. Jobs will be re-run.', queueError);
+    }
 
-    logger.info(`Successfully processed ${jobs.length} jobs.`);
-  } catch (error) {
-    logger.error('Error processing jobs:', error);
-    // Optionally, you could add more sophisticated error handling here,
-    // like marking jobs as failed instead of just leaving them as unprocessed.
+  } catch (processingError) {
+    // Si la Fase 1 falla, el error se captura aquí. Los trabajos NO se marcan
+    // como procesados y se reintentarán automáticamente en la siguiente ejecución.
+    logger.error('Error during the main processing transaction. Jobs will be retried.', processingError);
   }
 }
-
 async function cleanupProcessedJobs() {
   logger.info('Starting cleanup of processed jobs...');
   const cutoffDate = new Date();
