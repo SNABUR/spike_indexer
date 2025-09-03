@@ -1,0 +1,155 @@
+import { PrismaClient, TradeEvent } from '../prisma/generated/main_db';
+import { Decimal } from '@prisma/client/runtime/library';
+
+const prisma = new PrismaClient();
+
+/**
+ * Calcula el precio real teniendo en cuenta los decimales de cada token.
+ */
+function calculatePrice(trade: TradeEvent, decimalsMap: Map<string, number>): Decimal | null {
+  if (trade.virtualTokenReserves === 0n) {
+    return null;
+  }
+
+  const supraDecimals = 8; // Estándar para Move/Supra
+  const tokenDecimals = decimalsMap.get(trade.tokenAddress);
+
+  if (tokenDecimals === undefined) {
+    // No se encontraron decimales para este token, no se puede calcular el precio.
+    console.warn(`No se encontraron decimales para el token ${trade.tokenAddress}, se omitirá el cálculo del precio.`);
+    return null;
+  }
+
+  const supraReserves = new Decimal(trade.virtualSupraReserves.toString());
+  const tokenReserves = new Decimal(trade.virtualTokenReserves.toString());
+
+  if (tokenReserves.isZero()) {
+    return null;
+  }
+
+  // Ajustamos las reservas según sus decimales para obtener el valor real.
+  const adjustedSupraReserves = supraReserves.div(new Decimal(10).pow(supraDecimals));
+  const adjustedTokenReserves = tokenReserves.div(new Decimal(10).pow(tokenDecimals));
+
+  if (adjustedTokenReserves.isZero()) {
+    return null;
+  }
+
+  // El precio del token en SUPRA = (Reservas de SUPRA ajustadas) / (Reservas de Token ajustadas)
+  return adjustedSupraReserves.div(adjustedTokenReserves);
+}
+
+async function generateOHLC() {
+  console.log('Limpiando la tabla token_price_history...');
+  await prisma.token_price_history.deleteMany({});
+  console.log('Tabla limpiada.');
+
+  console.log('Iniciando la generación de datos OHLC (con cálculo de precio REAL)...');
+
+  // 1. Obtener todos los decimales de los tokens y guardarlos en un mapa para fácil acceso.
+  const pools = await prisma.poolsDB.findMany({
+    select: { tokenAddress: true, tokenDecimals: true },
+  });
+  const decimalsMap = new Map<string, number>();
+  for (const pool of pools) {
+    decimalsMap.set(pool.tokenAddress, pool.tokenDecimals);
+  }
+  console.log(`Se encontraron decimales para ${decimalsMap.size} tokens.`);
+
+  // 2. Obtener todos los trades.
+  const allTrades = await prisma.tradeEvent.findMany({
+    orderBy: { timestamp: 'asc' },
+  });
+
+  if (allTrades.length === 0) {
+    console.log('No hay trades para procesar.');
+    return;
+  }
+  console.log(`Se encontraron ${allTrades.length} trades para procesar.`);
+
+  // 3. Agrupar trades por minuto.
+  const tradesByMinute = new Map<string, TradeEvent[]>();
+  for (const trade of allTrades) {
+    // Sanity check de timestamp
+    const maxTimestamp = 999999999999n; // Corresponds to a 12-digit number, well into the future.
+    if (trade.timestamp > maxTimestamp || trade.timestamp < 0) {
+      console.warn(`Skipping trade with out-of-bounds timestamp: ${trade.id}, timestamp: ${trade.timestamp}`);
+      continue;
+    }
+
+    const minuteTimestamp = (trade.timestamp / 60n) * 60n * 1000n;
+    const key = `${trade.network}-${trade.tokenAddress}-${minuteTimestamp}`;
+    if (!tradesByMinute.has(key)) {
+      tradesByMinute.set(key, []);
+    }
+    tradesByMinute.get(key)!.push(trade);
+  }
+
+  // 4. Procesar cada cubeta de OHLC en una transacción.
+  await prisma.$transaction(async (tx) => {
+    console.log(`Procesando ${tradesByMinute.size} cubetas de OHLC...`);
+
+    const ohlcToCreate = [];
+    for (const [key, tradesInMinute] of tradesByMinute.entries()) {
+      const parts = key.split('-');
+      const minuteTimestampStr = parts.pop();
+      const tokenAddress = parts.pop();
+      const network = parts.join('-');
+      const minuteTimestamp = BigInt(minuteTimestampStr);
+      
+      // Usar el mapa de decimales en el cálculo de precios
+      const prices = tradesInMinute
+        .map(trade => calculatePrice(trade, decimalsMap))
+        .filter((p): p is Decimal => p !== null);
+
+      if (prices.length === 0) continue;
+
+      const volumeInSupra = tradesInMinute.reduce((acc, trade) => acc + trade.supraAmount, 0n);
+      // Ajustar volumen asumiendo 8 decimales para SUPRA
+      const adjustedVolume = new Decimal(volumeInSupra.toString()).div(new Decimal(10).pow(8));
+
+      ohlcToCreate.push({
+        network,
+        tokenAddress,
+        timestamp: minuteTimestamp,
+        granularity: '1m',
+        open: prices[0],
+        high: Decimal.max(...prices),
+        low: Decimal.min(...prices),
+        close: prices[prices.length - 1],
+        volume: adjustedVolume,
+      });
+    }
+
+    if (ohlcToCreate.length > 0) {
+      console.log(`Creando ${ohlcToCreate.length} registros de OHLC...`);
+      await tx.token_price_history.createMany({ 
+        data: ohlcToCreate,
+        skipDuplicates: true // Evita errores si un registro ya existe
+      });
+    }
+
+    const processedTradeIds = allTrades.map((trade) => trade.id);
+    await tx.tradeEvent.updateMany({
+      where: { id: { in: processedTradeIds } },
+      data: { processedForOHLC: true },
+    });
+
+    console.log(`Se marcaron ${processedTradeIds.length} trades como procesados.`);
+  });
+
+  console.log('Generación de datos OHLC completada con éxito.');
+}
+
+async function main() {
+  await generateOHLC();
+}
+
+main()
+  .catch((e: unknown) => {
+    console.error('Ocurrió un error durante la generación de OHLC:', e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

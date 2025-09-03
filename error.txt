@@ -1,0 +1,13 @@
+0|poller-worker     | SyntaxError: Invalid or unexpected token
+0|poller-worker     |     at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+0|poller-worker     |     at Module._compile (node:internal/modules/cjs/loader:1428:41)
+0|poller-worker     |     at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+0|poller-worker     |     at Module.load (node:internal/modules/cjs/loader:1288:32)
+0|poller-worker     |     at Module._load (node:internal/modules/cjs/loader:1104:12)
+0|poller-worker     |     at C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\lib\ProcessContainer.js:304:25
+0|poller-worker     |     at wrapper (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\internal\once.js:12:16)
+0|poller-worker     |     at next (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\waterfall.js:96:20)
+0|poller-worker     |     at C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\internal\onlyOnce.js:12:16
+0|poller-worker     |     at WriteStream.<anonymous> (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\lib\Utility.js:186:13)
+PM2                 | App name:poller-worker id:0 disconnected
+PM2                 | App [poller-worker:0] exited with code [0] via signal [SIGINT]

@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/queue_db"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./queue.db"
+}
+
+model Job {
+  id        Int      @id @default(autoincrement())
+  payload   Json
+  processed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

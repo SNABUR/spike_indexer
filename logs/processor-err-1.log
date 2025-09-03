@@ -1,0 +1,364 @@
+2025-09-02T16:25:17: node:internal/modules/cjs/loader:1225
+2025-09-02T16:25:17:   const err = new Error(message);
+2025-09-02T16:25:17:               ^
+2025-09-02T16:25:17: 
+2025-09-02T16:25:17: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:25:17: Require stack:
+2025-09-02T16:25:17: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:25:17: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:25:17:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:25:17:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:25:17:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:25:17:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:25:17:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:25:17:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:25:17:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:25:17:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:25:17:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:25:17:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:25:17:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:25:17:   requireStack: [
+2025-09-02T16:25:17:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:25:17:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:25:17:   ]
+2025-09-02T16:25:17: }
+2025-09-02T16:25:17: 
+2025-09-02T16:25:17: Node.js v20.17.0
+2025-09-02T16:25:23: node:internal/modules/cjs/loader:1225
+2025-09-02T16:25:23:   const err = new Error(message);
+2025-09-02T16:25:23:               ^
+2025-09-02T16:25:23: 
+2025-09-02T16:25:23: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:25:23: Require stack:
+2025-09-02T16:25:23: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:25:23: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:25:23:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:25:23:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:25:23:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:25:23:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:25:23:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:25:23:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:25:23:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:25:23:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:25:23:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:25:23:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:25:23:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:25:23:   requireStack: [
+2025-09-02T16:25:23:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:25:23:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:25:23:   ]
+2025-09-02T16:25:23: }
+2025-09-02T16:25:23: 
+2025-09-02T16:25:23: Node.js v20.17.0
+2025-09-02T16:25:29: node:internal/modules/cjs/loader:1225
+2025-09-02T16:25:29:   const err = new Error(message);
+2025-09-02T16:25:29:               ^
+2025-09-02T16:25:29: 
+2025-09-02T16:25:29: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:25:29: Require stack:
+2025-09-02T16:25:29: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:25:29: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:25:29:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:25:29:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:25:29:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:25:29:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:25:29:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:25:29:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:25:29:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:25:29:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:25:29:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:25:29:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:25:29:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:25:29:   requireStack: [
+2025-09-02T16:25:29:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:25:29:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:25:29:   ]
+2025-09-02T16:25:29: }
+2025-09-02T16:25:29: 
+2025-09-02T16:25:29: Node.js v20.17.0
+2025-09-02T16:25:35: node:internal/modules/cjs/loader:1225
+2025-09-02T16:25:35:   const err = new Error(message);
+2025-09-02T16:25:35:               ^
+2025-09-02T16:25:35: 
+2025-09-02T16:25:35: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:25:35: Require stack:
+2025-09-02T16:25:35: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:25:35: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:25:35:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:25:35:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:25:35:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:25:35:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:25:35:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:25:35:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:25:35:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:25:35:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:25:35:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:25:35:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:25:35:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:25:35:   requireStack: [
+2025-09-02T16:25:35:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:25:35:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:25:35:   ]
+2025-09-02T16:25:35: }
+2025-09-02T16:25:35: 
+2025-09-02T16:25:35: Node.js v20.17.0
+2025-09-02T16:25:40: node:internal/modules/cjs/loader:1225
+2025-09-02T16:25:40:   const err = new Error(message);
+2025-09-02T16:25:40:               ^
+2025-09-02T16:25:40: 
+2025-09-02T16:25:40: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:25:40: Require stack:
+2025-09-02T16:25:40: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:25:40: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:25:40:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:25:40:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:25:40:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:25:40:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:25:40:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:25:40:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:25:40:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:25:40:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:25:40:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:25:40:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:25:40:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:25:40:   requireStack: [
+2025-09-02T16:25:40:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:25:40:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:25:40:   ]
+2025-09-02T16:25:40: }
+2025-09-02T16:25:40: 
+2025-09-02T16:25:40: Node.js v20.17.0
+2025-09-02T16:32:32: node:internal/modules/cjs/loader:1225
+2025-09-02T16:32:32:   const err = new Error(message);
+2025-09-02T16:32:32:               ^
+2025-09-02T16:32:32: 
+2025-09-02T16:32:32: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:32:32: Require stack:
+2025-09-02T16:32:32: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:32:32: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:32:32:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:32:32:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:32:32:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:32:32:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:32:32:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:32:32:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:32:32:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:32:32:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:32:32:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:32:32:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:32:32:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:32:32:   requireStack: [
+2025-09-02T16:32:32:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:32:32:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:32:32:   ]
+2025-09-02T16:32:32: }
+2025-09-02T16:32:32: 
+2025-09-02T16:32:32: Node.js v20.17.0
+2025-09-02T16:32:38: node:internal/modules/cjs/loader:1225
+2025-09-02T16:32:38:   const err = new Error(message);
+2025-09-02T16:32:38:               ^
+2025-09-02T16:32:38: 
+2025-09-02T16:32:38: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:32:38: Require stack:
+2025-09-02T16:32:38: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:32:38: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:32:38:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:32:38:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:32:38:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:32:38:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:32:38:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:32:38:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:32:38:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:32:38:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:32:38:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:32:38:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:32:38:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:32:38:   requireStack: [
+2025-09-02T16:32:38:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:32:38:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:32:38:   ]
+2025-09-02T16:32:38: }
+2025-09-02T16:32:38: 
+2025-09-02T16:32:38: Node.js v20.17.0
+2025-09-02T16:32:43: node:internal/modules/cjs/loader:1225
+2025-09-02T16:32:43:   const err = new Error(message);
+2025-09-02T16:32:43:               ^
+2025-09-02T16:32:43: 
+2025-09-02T16:32:43: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:32:43: Require stack:
+2025-09-02T16:32:43: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:32:43: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:32:43:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:32:43:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:32:43:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:32:43:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:32:43:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:32:43:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:32:43:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:32:43:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:32:43:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:32:43:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:32:43:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:32:43:   requireStack: [
+2025-09-02T16:32:43:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:32:43:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:32:43:   ]
+2025-09-02T16:32:43: }
+2025-09-02T16:32:43: 
+2025-09-02T16:32:43: Node.js v20.17.0
+2025-09-02T16:32:49: node:internal/modules/cjs/loader:1225
+2025-09-02T16:32:49:   const err = new Error(message);
+2025-09-02T16:32:49:               ^
+2025-09-02T16:32:49: 
+2025-09-02T16:32:49: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:32:49: Require stack:
+2025-09-02T16:32:49: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:32:49: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:32:49:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:32:49:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:32:49:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:32:49:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:32:49:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:32:49:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:32:49:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:32:49:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:32:49:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:32:49:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:32:49:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:32:49:   requireStack: [
+2025-09-02T16:32:49:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:32:49:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:32:49:   ]
+2025-09-02T16:32:49: }
+2025-09-02T16:32:49: 
+2025-09-02T16:32:49: Node.js v20.17.0
+2025-09-02T16:32:55: node:internal/modules/cjs/loader:1225
+2025-09-02T16:32:55:   const err = new Error(message);
+2025-09-02T16:32:55:               ^
+2025-09-02T16:32:55: 
+2025-09-02T16:32:55: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:32:55: Require stack:
+2025-09-02T16:32:55: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:32:55: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:32:55:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:32:55:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:32:55:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:32:55:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:32:55:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:32:55:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:32:55:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:32:55:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:32:55:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:32:55:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:32:55:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:32:55:   requireStack: [
+2025-09-02T16:32:55:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:32:55:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:32:55:   ]
+2025-09-02T16:32:55: }
+2025-09-02T16:32:55: 
+2025-09-02T16:32:55: Node.js v20.17.0
+2025-09-02T16:33:00: node:internal/modules/cjs/loader:1225
+2025-09-02T16:33:00:   const err = new Error(message);
+2025-09-02T16:33:00:               ^
+2025-09-02T16:33:00: 
+2025-09-02T16:33:00: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:33:00: Require stack:
+2025-09-02T16:33:00: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:33:00: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:33:00:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:33:00:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:33:00:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:33:00:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:33:00:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:33:00:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:33:00:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:33:00:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:33:00:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:33:00:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:33:00:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:33:00:   requireStack: [
+2025-09-02T16:33:00:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:33:00:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:33:00:   ]
+2025-09-02T16:33:00: }
+2025-09-02T16:33:00: 
+2025-09-02T16:33:00: Node.js v20.17.0
+2025-09-02T16:33:06: node:internal/modules/cjs/loader:1225
+2025-09-02T16:33:06:   const err = new Error(message);
+2025-09-02T16:33:06:               ^
+2025-09-02T16:33:06: 
+2025-09-02T16:33:06: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:33:06: Require stack:
+2025-09-02T16:33:06: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:33:06: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:33:06:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:33:06:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:33:06:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:33:06:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:33:06:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:33:06:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:33:06:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:33:06:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:33:06:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:33:06:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:33:06:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:33:06:   requireStack: [
+2025-09-02T16:33:06:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:33:06:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:33:06:   ]
+2025-09-02T16:33:06: }
+2025-09-02T16:33:06: 
+2025-09-02T16:33:06: Node.js v20.17.0
+2025-09-02T16:39:46: node:internal/modules/cjs/loader:1225
+2025-09-02T16:39:46:   const err = new Error(message);
+2025-09-02T16:39:46:               ^
+2025-09-02T16:39:46: 
+2025-09-02T16:39:46: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:39:46: Require stack:
+2025-09-02T16:39:46: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:39:46: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:39:46:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:39:46:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:39:46:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:39:46:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:39:46:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:39:46:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:39:46:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:39:46:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:39:46:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:39:46:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:39:46:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:39:46:   requireStack: [
+2025-09-02T16:39:46:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:39:46:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:39:46:   ]
+2025-09-02T16:39:46: }
+2025-09-02T16:39:46: 
+2025-09-02T16:39:46: Node.js v20.17.0
+2025-09-02T16:39:52: node:internal/modules/cjs/loader:1225
+2025-09-02T16:39:52:   const err = new Error(message);
+2025-09-02T16:39:52:               ^
+2025-09-02T16:39:52: 
+2025-09-02T16:39:52: Error: Cannot find module '../prisma/generated/queue'
+2025-09-02T16:39:52: Require stack:
+2025-09-02T16:39:52: - D:\indexer_and_bot_telegram\spike_indexer\lib\queue-prismadb.ts
+2025-09-02T16:39:52: - D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts
+2025-09-02T16:39:52:     at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+2025-09-02T16:39:52:     at nextResolveSimple (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1004)
+2025-09-02T16:39:52:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:2630
+2025-09-02T16:39:52:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:3:1542
+2025-09-02T16:39:52:     at resolveTsPaths (D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:760)
+2025-09-02T16:39:52:     at D:\indexer_and_bot_telegram\spike_indexer\node_modules\tsx\dist\register-D46fvsV_.cjs:4:1102
+2025-09-02T16:39:52:     at m._resolveFilename (file:///D:/indexer_and_bot_telegram/spike_indexer/node_modules/tsx/dist/register-B7jrtLTO.mjs:1:789)
+2025-09-02T16:39:52:     at Module._load (node:internal/modules/cjs/loader:1051:27)
+2025-09-02T16:39:52:     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2025-09-02T16:39:52:     at require (node:internal/modules/helpers:179:18) {
+2025-09-02T16:39:52:   code: 'MODULE_NOT_FOUND',
+2025-09-02T16:39:52:   requireStack: [
+2025-09-02T16:39:52:     'D:\\indexer_and_bot_telegram\\spike_indexer\\lib\\queue-prismadb.ts',
+2025-09-02T16:39:52:     'D:\\indexer_and_bot_telegram\\spike_indexer\\src\\processor-worker.ts'
+2025-09-02T16:39:52:   ]
+2025-09-02T16:39:52: }
+2025-09-02T16:39:52: 
+2025-09-02T16:39:52: Node.js v20.17.0

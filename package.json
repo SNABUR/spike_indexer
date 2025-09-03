@@ -1,0 +1,41 @@
+{
+  "name": "crystara_indexer",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "start:indexer": "pm2 start ecosystem.config.js",
+    "stop:indexer": "pm2 stop ecosystem.config.js",
+    "restart:indexer": "pm2 restart ecosystem.config.js",
+    "logs:indexer": "pm2 logs",
+
+    "prisma:migrate:main": "prisma migrate dev --schema=./prisma/main_db/schema.prisma",
+    "prisma:migrate:ohlc": "prisma migrate dev --schema=./prisma/ohlc_db/schema.prisma",
+    "prisma:migrate:queue": "prisma migrate dev --schema=./prisma/queue_db/schema.prisma",
+    "prisma:generate:main": "prisma generate --schema=./prisma/main_db/schema.prisma",
+    "prisma:generate:ohlc": "prisma generate --schema=./prisma/ohlc_db/schema.prisma",
+    "prisma:generate:queue": "prisma generate --schema=./prisma/queue_db/schema.prisma",
+    "prisma:generate": "npm run prisma:generate:main && npm run prisma:generate:ohlc && npm run prisma:generate:queue"
+  },
+
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "@prisma/extension-pulse": "^1.2.0",
+    "axios": "^1.8.1",
+    "better-sqlite3": "^9.4.5",
+    "decimal.js": "^10.5.0",
+    "dotenv": "^16.4.7",
+    "node-cron": "^4.0.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/better-sqlite3": "^7.6.10",
+    "@types/node": "^20.17.14",
+    "eslint": "^9",
+    "prisma": "^6.2.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,27 @@
+Resumen de la Investigación: 7dAPR es nulo
+
+Problema Inicial:
+El campo `7dAPR` en la tabla `Ammpair` de la base de datos principal es `null` para todos los pares de `supra-mainnet`.
+
+Pasos de la Investigación:
+
+1.  Análisis del Código:
+    - Se revisó `amm-pair-processor.ts`. La función `calculate7dApr` devuelve `null` si el `pairTvlUsd` (TVL del par) es cero o si `baseData.swapFeeBps` (comisión de swap) no está definido.
+
+2.  Verificación de Datos:
+    - Se creó y ejecutó el script `scripts/verify-data.ts` para inspeccionar la base de datos directamente.
+    - El script confirmó que los tokens involucrados en los pares tienen definidos tanto los `decimals` como los `priceUsd`.
+    - También se confirmó que el `tvlUsd` se está calculando correctamente y no es cero.
+
+3.  Descubrimiento de la Causa Raíz:
+    - La función `fetch7dVolumeData` en `data-fetcher.ts` intenta obtener el volumen de los últimos 7 días de la tabla `OhlcData` filtrando por `ammSource: 'SpikeySwap'`.
+    - La salida del script de verificación mostró que los datos de volumen existentes en la tabla `OhlcData` tienen `ammSource: 'DexlynSwap'`.
+    - Esta discrepancia causa que la consulta no devuelva ningún dato de volumen para los pares de `SpikeySwap`, resultando en un `volumeUsd7d` de cero.
+
+Conclusión Principal:
+
+El problema de que el `7dAPR` sea nulo se origina porque el sistema no está encontrando datos de volumen para los pares de `SpikeySwap`. Esto se debe a que el indexador no está guardando los datos de `OhlcData` con el `ammSource` correcto ('SpikeySwap') o no los está guardando en absoluto.
+
+Siguiente Paso para el Otro Repositorio:
+
+Investigar por qué el indexer no está poblando la tabla `OhlcData` en la base de datos de OHLC con los datos de volumen de los pares provenientes de `SpikeySwap`.

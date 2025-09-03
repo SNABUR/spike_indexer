@@ -1,0 +1,97 @@
+2025-09-02T17:00:55: [poller-worker] INFO: Starting Supra Chain Pollers for Testnet and Mainnet...
+2025-09-02T17:00:55: [poller-worker] INFO: Setting up poller for Testnet (ID: supra-testnet)
+2025-09-02T17:00:55: [poller] INFO: EventPoller instance created for ID: supra-testnet, network: supra-testnet, RPC: https://rpc-testnet.supra.com/rpc/v1, Save Interval: 30 mins
+2025-09-02T17:00:55: [poller-worker] INFO: Setting up poller for Mainnet (ID: supra-mainnet)
+2025-09-02T17:00:55: [poller] INFO: EventPoller instance created for ID: supra-mainnet, network: supra-mainnet, RPC: https://rpc-mainnet.supra.com/rpc/v1, Save Interval: 30 mins
+2025-09-02T17:00:55: [poller] INFO: [supra-testnet] Initializing...
+2025-09-02T17:00:55: [poller] INFO: [supra-mainnet] Initializing...
+2025-09-02T17:00:56: prisma:info Starting a postgresql pool with 13 connections in PgBouncer mode.
+2025-09-02T17:00:57: prisma:query BEGIN
+2025-09-02T17:00:57: prisma:query DEALLOCATE ALL
+2025-09-02T17:00:58: prisma:query SELECT "public"."block_progress"."network", "public"."block_progress"."lastBlockHeight", "public"."block_progress"."updatedAt" FROM "public"."block_progress" WHERE "public"."block_progress"."network" IN ($1,$2) OFFSET $3
+2025-09-02T17:00:58: prisma:query COMMIT
+2025-09-02T17:00:58: [poller] INFO: [supra-testnet] Resuming from block 32154942 (last saved: 32154941)
+2025-09-02T17:00:58: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:00:58: [poller] INFO: [supra-mainnet] Resuming from block 22056601 (last saved: 22056600)
+2025-09-02T17:00:58: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:00:59: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094779
+2025-09-02T17:00:59: [poller] INFO: [supra-mainnet] Initialized. Current Polling Block: 22056601, Latest Chain Block: 22094779
+2025-09-02T17:00:59: [poller] INFO: [supra-mainnet] Starting event poller...
+2025-09-02T17:00:59: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:01:00: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256238
+2025-09-02T17:01:00: [poller] INFO: [supra-testnet] Initialized. Current Polling Block: 32154942, Latest Chain Block: 32256238
+2025-09-02T17:01:00: [poller] INFO: [supra-testnet] Starting event poller...
+2025-09-02T17:01:00: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:00: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094780
+2025-09-02T17:01:00: [poller] INFO: [supra-mainnet] Updated latest block height from 22094779 to 22094780
+2025-09-02T17:01:00: [poller] INFO: [supra-mainnet] Processing blocks 22056601 to 22056610 (Latest: 22094780)
+2025-09-02T17:01:01: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256242
+2025-09-02T17:01:01: [poller] INFO: [supra-testnet] Updated latest block height from 32256238 to 32256242
+2025-09-02T17:01:01: [poller] INFO: [supra-testnet] Processing blocks 32154942 to 32154951 (Latest: 32256242)
+2025-09-02T17:01:03: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154942-32154952
+2025-09-02T17:01:03: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:04: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256247
+2025-09-02T17:01:04: [poller] INFO: [supra-testnet] Updated latest block height from 32256242 to 32256247
+2025-09-02T17:01:04: [poller] INFO: [supra-testnet] Processing blocks 32154952 to 32154961 (Latest: 32256247)
+2025-09-02T17:01:05: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154952-32154962
+2025-09-02T17:01:05: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:05: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256251
+2025-09-02T17:01:05: [poller] INFO: [supra-testnet] Updated latest block height from 32256247 to 32256251
+2025-09-02T17:01:05: [poller] INFO: [supra-testnet] Processing blocks 32154962 to 32154971 (Latest: 32256251)
+2025-09-02T17:01:06: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154962-32154972
+2025-09-02T17:01:06: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:07: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256255
+2025-09-02T17:01:07: [poller] INFO: [supra-testnet] Updated latest block height from 32256251 to 32256255
+2025-09-02T17:01:07: [poller] INFO: [supra-testnet] Processing blocks 32154972 to 32154981 (Latest: 32256255)
+2025-09-02T17:01:08: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154972-32154982
+2025-09-02T17:01:08: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:09: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-mainnet.supra.com/rpc/v1 for blocks 22056601-22056611
+2025-09-02T17:01:09: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:01:09: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256259
+2025-09-02T17:01:09: [poller] INFO: [supra-testnet] Updated latest block height from 32256255 to 32256259
+2025-09-02T17:01:09: [poller] INFO: [supra-testnet] Processing blocks 32154982 to 32154991 (Latest: 32256259)
+2025-09-02T17:01:10: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154982-32154992
+2025-09-02T17:01:10: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:10: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094789
+2025-09-02T17:01:10: [poller] INFO: [supra-mainnet] Updated latest block height from 22094780 to 22094789
+2025-09-02T17:01:10: [poller] INFO: [supra-mainnet] Processing blocks 22056611 to 22056620 (Latest: 22094789)
+2025-09-02T17:01:11: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256265
+2025-09-02T17:01:11: [poller] INFO: [supra-testnet] Updated latest block height from 32256259 to 32256265
+2025-09-02T17:01:11: [poller] INFO: [supra-testnet] Processing blocks 32154992 to 32155001 (Latest: 32256265)
+2025-09-02T17:01:12: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32154992-32155002
+2025-09-02T17:01:12: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:12: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-mainnet.supra.com/rpc/v1 for blocks 22056611-22056621
+2025-09-02T17:01:12: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:01:13: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256269
+2025-09-02T17:01:13: [poller] INFO: [supra-testnet] Updated latest block height from 32256265 to 32256269
+2025-09-02T17:01:13: [poller] INFO: [supra-testnet] Processing blocks 32155002 to 32155011 (Latest: 32256269)
+2025-09-02T17:01:13: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094793
+2025-09-02T17:01:13: [poller] INFO: [supra-mainnet] Updated latest block height from 22094789 to 22094793
+2025-09-02T17:01:13: [poller] INFO: [supra-mainnet] Processing blocks 22056621 to 22056630 (Latest: 22094793)
+2025-09-02T17:01:14: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32155002-32155012
+2025-09-02T17:01:14: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:15: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-mainnet.supra.com/rpc/v1 for blocks 22056621-22056631
+2025-09-02T17:01:15: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:01:15: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256273
+2025-09-02T17:01:15: [poller] INFO: [supra-testnet] Updated latest block height from 32256269 to 32256273
+2025-09-02T17:01:15: [poller] INFO: [supra-testnet] Processing blocks 32155012 to 32155021 (Latest: 32256273)
+2025-09-02T17:01:15: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094798
+2025-09-02T17:01:15: [poller] INFO: [supra-mainnet] Updated latest block height from 22094793 to 22094798
+2025-09-02T17:01:15: [poller] INFO: [supra-mainnet] Processing blocks 22056631 to 22056640 (Latest: 22094798)
+2025-09-02T17:01:16: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32155012-32155022
+2025-09-02T17:01:16: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:16: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-mainnet.supra.com/rpc/v1 for blocks 22056631-22056641
+2025-09-02T17:01:16: [rpcClient] DEBUG: Fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1/block
+2025-09-02T17:01:16: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256278
+2025-09-02T17:01:16: [poller] INFO: [supra-testnet] Updated latest block height from 32256273 to 32256278
+2025-09-02T17:01:16: [poller] INFO: [supra-testnet] Processing blocks 32155022 to 32155031 (Latest: 32256278)
+2025-09-02T17:01:16: [rpcClient] DEBUG: Latest block height from https://rpc-mainnet.supra.com/rpc/v1: 22094802
+2025-09-02T17:01:16: [poller] INFO: [supra-mainnet] Updated latest block height from 22094798 to 22094802
+2025-09-02T17:01:16: [poller] INFO: [supra-mainnet] Processing blocks 22056641 to 22056650 (Latest: 22094802)
+2025-09-02T17:01:17: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32155022-32155032
+2025-09-02T17:01:17: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
+2025-09-02T17:01:17: [rpcClient] DEBUG: Latest block height from https://rpc-testnet.supra.com/rpc/v1: 32256281
+2025-09-02T17:01:17: [poller] INFO: [supra-testnet] Updated latest block height from 32256278 to 32256281
+2025-09-02T17:01:17: [poller] INFO: [supra-testnet] Processing blocks 32155032 to 32155041 (Latest: 32256281)
+2025-09-02T17:01:18: [rpcClient] DEBUG: Fetched 0 events in total from https://rpc-testnet.supra.com/rpc/v1 for blocks 32155032-32155042
+2025-09-02T17:01:18: [rpcClient] DEBUG: Fetching latest block height from https://rpc-testnet.supra.com/rpc/v1/block
