@@ -100,10 +100,11 @@ export async function fetch24hVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
         const wrappedToken1 = legacyToWrappedMap.get(ohlc.token1Address) ?? ohlc.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        const volumeToken1 = ohlc.volume ?? new Decimal(0);
-        const priceToken1 = pricesMap.get(wrappedToken1);
+        // CORRECCIÓN: El volumen en OHLC está en términos de token0 (SUPRA).
+        const volumeInSupra = ohlc.volume ?? new Decimal(0);
+        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
 
-        const volumeUsd = priceToken1 ? volumeToken1.mul(priceToken1) : new Decimal(0);
+        const volumeUsd = priceToken0 ? volumeInSupra.mul(priceToken0) : new Decimal(0);
         
         volumeMap.set(key, volumeUsd);
     }
@@ -140,10 +141,11 @@ export async function fetch7dVolumeData(ohlcDB: OhlcPrismaClient, config: Networ
         const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        const totalVolumeToken1 = group._sum.volume ?? new Decimal(0);
-        const priceToken1 = pricesMap.get(wrappedToken1);
+        // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).
+        const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);
+        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
 
-        const volumeUsd = priceToken1 ? totalVolumeToken1.mul(priceToken1) : new Decimal(0);
+        const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);
 
         volumeMap.set(key, volumeUsd);
     }
@@ -180,10 +182,11 @@ export async function fetch30dVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
         const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        const totalVolumeToken1 = group._sum.volume ?? new Decimal(0);
-        const priceToken1 = pricesMap.get(wrappedToken1);
+        // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).
+        const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);
+        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
 
-        const volumeUsd = priceToken1 ? totalVolumeToken1.mul(priceToken1) : new Decimal(0);
+        const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);
 
         volumeMap.set(key, volumeUsd);
     }

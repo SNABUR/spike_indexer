@@ -1,13 +1,119 @@
-0|poller-worker     | SyntaxError: Invalid or unexpected token
-0|poller-worker     |     at wrapSafe (node:internal/modules/cjs/loader:1378:20)
-0|poller-worker     |     at Module._compile (node:internal/modules/cjs/loader:1428:41)
-0|poller-worker     |     at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
-0|poller-worker     |     at Module.load (node:internal/modules/cjs/loader:1288:32)
-0|poller-worker     |     at Module._load (node:internal/modules/cjs/loader:1104:12)
-0|poller-worker     |     at C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\lib\ProcessContainer.js:304:25
-0|poller-worker     |     at wrapper (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\internal\once.js:12:16)
-0|poller-worker     |     at next (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\waterfall.js:96:20)
-0|poller-worker     |     at C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\node_modules\async\internal\onlyOnce.js:12:16
-0|poller-worker     |     at WriteStream.<anonymous> (C:\Users\SNABUR\AppData\Roaming\npm\node_modules\pm2\lib\Utility.js:186:13)
-PM2                 | App name:poller-worker id:0 disconnected
-PM2                 | App [poller-worker:0] exited with code [0] via signal [SIGINT]
+
+✦ Excelente punto. Tienes toda la razón, atacar la causa raíz es la mejor estrategia. Arreglar el script que genera los datos asegura que el problema se corrija permanentemente en la siguiente ejecución del ciclo de actualización.
+
+  He analizado el archivo D:\indexer_and_bot_telegram\spike_indexer\lib\tasks\update-cycle\data-fetcher.ts y has dado en el clavo. El error está exactamente ahí.
+
+  El Problema:
+
+  Dentro de data-fetcher.ts, en la función getStatsForPair, el código calcula el volumen en USD (volumeUsd24h y volumeUsd7d) de la siguiente manera:
+
+   1. Obtiene los registros de OhlcData de las últimas 24 horas / 7 días.
+   2. Suma los volume de esos registros.
+   3. Multiplica esa suma por el precio del `token1` (supETH).
+
+  Como descubrimos, el campo volume en OhlcData (y en su origen, token_price_history) se está almacenando en términos de SUPRA (`token0`), no de supETH (token1).
+
+  El código está haciendo esto: Volumen en SUPRA * Precio de supETH en USD, lo que produce el número astronómicamente incorrecto.
+
+  La Solución:
+
+  La corrección es simple: debemos multiplicar el volumen por el precio de SUPRA (`token0PriceUsd`) en lugar del precio de supETH (token1PriceUsd).
+
+  Voy a aplicar este cambio directamente en data-fetcher.ts.
+
+  Primero, leeré el archivo para obtener el contenido exacto.
+ ╭────────────────────────────────────────────────────────╮
+ │ ✔ ReadFile ...xer\tasks\update-cycle\data-fetcher.ts  │
+ ╰────────────────────────────────────────────────────────╯
+✦ Perfecto. He identificado las funciones fetch24hVolumeData, fetch7dVolumeData y fetch30dVolumeData. Todas ellas contienen la lógica incorrecta.
+
+  El error es sutil. Por ejemplo, en fetch24hVolumeData:
+
+   1 const volumeToken1 = ohlc.volume ?? new Decimal(0);
+   2 const priceToken1 = pricesMap.get(wrappedToken1);
+   3 
+   4 const volumeUsd = priceToken1 ? volumeToken1.mul(priceToken1) : new Decimal(0);
+
+  Asume que ohlc.volume es volumeToken1 y lo multiplica por priceToken1.
+
+  La corrección es usar el precio del token0 (SUPRA), ya que sabemos que el volumen está denominado en SUPRA. Lo mismo aplica para las funciones de 7 y 30 días.
+
+  Voy a reemplazar el contenido completo del archivo con la versión corregida.
+ ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+ │ ✔ Edit ...xer\tasks\update-cycle\data-fetcher.ts: import { Ammpair, PrismaClient... => import { Ammpair, PrismaClient...                                                                                                                                    │
+ │                                                                                                                                                                                                                                                              │
+ │    100       const wrappedToken1 = legacyToWrappedMap.get(ohlc.token1Address) ?? ohlc.token1Address;                                                                                                                                                         │
+ │    101       const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();                                                                                                                                                                      │
+ │    102                                                                                                                                                                                                                                                       │
+ │    103 -     const volumeToken1 = ohlc.volume ?? new Decimal(0);                                                                                                                                                                                             │
+ │    104 -     const priceToken1 = pricesMap.get(wrappedToken1);                                                                                                                                                                                               │
+ │    103 +     // CORRECCIÓN: El volumen en OHLC está en términos de token0 (SUPRA).                                                                                                                                                                           │
+ │    104 +     const volumeInSupra = ohlc.volume ?? new Decimal(0);                                                                                                                                                                                            │
+ │    105 +     const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA                                                                                                                                                                    │
+ │    106                                                                                                                                                                                                                                                       │
+ │    106 -     const volumeUsd = priceToken1 ? volumeToken1.mul(priceToken1) : new Decimal(0);                                                                                                                                                                 │
+ │    107 +     const volumeUsd = priceToken0 ? volumeInSupra.mul(priceToken0) : new Decimal(0);                                                                                                                                                                │
+ │    108                                                                                                                                                                                                                                                       │
+ │    109       volumeMap.set(key, volumeUsd);                                                                                                                                                                                                                  │
+ │    110   }                                                                                                                                                                                                                                                   │
+ │    ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════  │
+ │    141       const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;                                                                                                                                                       │
+ │    142       const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();                                                                                                                                                                      │
+ │    143                                                                                                                                                                                                                                                       │
+ │    143 -     const totalVolume = group._sum.volume ?? new Decimal(0);                                                                                                                                                                                        │
+ │    144 -     const priceToken0 = pricesMap.get(wrappedToken0);                                                                                                                                                                                               │
+ │    145 -     const priceToken1 = pricesMap.get(wrappedToken1);                                                                                                                                                                                               │
+ │    144 +     // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).                                                                                                                                                                            │
+ │    145 +     const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);                                                                                                                                                                                 │
+ │    146 +     const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA                                                                                                                                                                    │
+ │    147                                                                                                                                                                                                                                                       │
+ │    147 -     let volumeUsd = new Decimal(0);                                                                                                                                                                                                                 │
+ │    148 -     if (priceToken0 && priceToken1) {                                                                                                                                                                                                               │
+ │    149 -         // Assume 50/50 split in volume between token0 and token1                                                                                                                                                                                   │
+ │    150 -         const volumeToken0 = totalVolume.div(2);                                                                                                                                                                                                    │
+ │    151 -         const volumeToken1 = totalVolume.div(2);                                                                                                                                                                                                    │
+ │    152 -         volumeUsd = volumeToken0.mul(priceToken0).add(volumeToken1.mul(priceToken1));                                                                                                                                                               │
+ │    153 -     } else if (priceToken0) {                                                                                                                                                                                                                       │
+ │    154 -         volumeUsd = totalVolume.mul(priceToken0);                                                                                                                                                                                                   │
+ │    155 -     } else if (priceToken1) {                                                                                                                                                                                                                       │
+ │    156 -         volumeUsd = totalVolume.mul(priceToken1);                                                                                                                                                                                                   │
+ │    157 -     }                                                                                                                                                                                                                                               │
+ │    148 +     const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);                                                                                                                                                           │
+ │    149                                                                                                                                                                                                                                                       │
+ │    150       volumeMap.set(key, volumeUsd);                                                                                                                                                                                                                  │
+ │    151   }                                                                                                                                                                                                                                                   │
+ │    ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════  │
+ │    182       const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;                                                                                                                                                       │
+ │    183       const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();                                                                                                                                                                      │
+ │    184                                                                                                                                                                                                                                                       │
+ │    ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════  │
+ │    194 -     const totalVolume = group._sum.volume ?? new Decimal(0);                                                                                                                                                                                        │
+ │    195 -     const priceToken0 = pricesMap.get(wrappedToken0);                                                                                                                                                                                               │
+ │    196 -     const priceToken1 = pricesMap.get(wrappedToken1);                                                                                                                                                                                               │
+ │    185 +     // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).                                                                                                                                                                            │
+ │    186 +     const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);                                                                                                                                                                                 │
+ │    187 +     const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA                                                                                                                                                                    │
+ │    188                                                                                                                                                                                                                                                       │
+ │    ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════  │
+ │    198 -     let volumeUsd = new Decimal(0);                                                                                                                                                                                                                 │
+ │    199 -     if (priceToken0 && priceToken1) {                                                                                                                                                                                                               │
+ │    200 -         // Assume 50/50 split in volume between token0 and token1                                                                                                                                                                                   │
+ │    201 -         const volumeToken0 = totalVolume.div(2);                                                                                                                                                                                                    │
+ │    202 -         const volumeToken1 = totalVolume.div(2);                                                                                                                                                                                                    │
+ │    203 -         volumeUsd = volumeToken0.mul(priceToken0).add(volumeToken1.mul(priceToken1));                                                                                                                                                               │
+ │    204 -     } else if (priceToken0) {                                                                                                                                                                                                                       │
+ │    205 -         volumeUsd = totalVolume.mul(priceToken0);                                                                                                                                                                                                   │
+ │    206 -     } else if (priceToken1) {                                                                                                                                                                                                                       │
+ │    207 -         volumeUsd = totalVolume.mul(priceToken1);                                                                                                                                                                                                   │
+ │    208 -     }                                                                                                                                                                                                                                               │
+ │    189 +     const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);                                                                                                                                                           │
+ │    190                                                                                                                                                                                                                                                       │
+ │    191       volumeMap.set(key, volumeUsd);                                                                                                                                                                                                                  │
+ │    192   }                                                                                                                                                                                                                                                   │
+ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+✦ Hecho. He corregido la lógica en data-fetcher.ts para que utilice el precio de SUPRA (token0) al calcular el volumen en USD.
+
+  Con este cambio, la próxima vez que se ejecute el ciclo de actualización de datos (update-cycle), los valores de volumeUsd24h, volumeUsd7d, y volumeUsd30d se calcularán correctamente. Esto, a su vez, arreglará las métricas de APR y mostrará datos consistentes
+  y lógicos para el par.
+
+  Ya no es necesario ejecutar un script de corrección manual en la base de datos. El problema está solucionado en su origen.

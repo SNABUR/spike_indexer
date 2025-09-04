@@ -1,7 +1,7 @@
 import { createServer } from 'http'
 import { parse } from 'url'
 import next from 'next'
-import { startIndexer } from './app/indexer'
+import { startIndexer } from './src/indexer/index'
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })

@@ -1,9 +1,10 @@
-import { startIndexer } from '../app/indexer'
-import { createLogger } from '../app/indexer/utils'
+import { startIndexer } from '../src/indexer'
+import { createLogger } from '../src/indexer/utils'
+require('dotenv').config({ path: 'D:/indexer_and_bot_telegram/spike_indexer/.env' });
 
 const logger = createLogger('local-indexer')
 
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', (error: any) => {
   logger.error('Uncaught Exception:', error)
   process.exit(1)
 })

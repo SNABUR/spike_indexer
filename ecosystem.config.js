@@ -38,6 +38,24 @@ module.exports = {
       restart_delay: 5000,
       env_file: '.env',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
+    },
+    {
+      name: 'scheduler-worker',
+      script: 'node',
+      args: './node_modules/tsx/dist/cli.mjs src/scheduler-worker.ts',
+      env: {
+        NODE_ENV: 'production',
+      },
+      max_memory_restart: '1G',
+      error_file: 'logs/scheduler-err.log',
+      out_file: 'logs/scheduler-out.log',
+      time: true,
+      instances: 1,
+      autorestart: true,
+      max_restarts: 10,
+      restart_delay: 5000,
+      env_file: '.env',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
     }
   ]
 }

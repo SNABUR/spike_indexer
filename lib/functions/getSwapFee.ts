@@ -1,6 +1,6 @@
 // src/lib/functions/getSwappFee.ts
 import { callViewFunction } from '../viewFunction/useView'; // Ajusta la ruta y el tipo Network si es necesario
-import { createLogger } from '../../app/indexer/utils'; // Para logging
+import { createLogger } from '../../src/indexer/utils';
 import { NetworkConfig } from '../TaskProcessor'; // Importa la interfaz
 
 const logger = createLogger('getSwapFee-hook');
@@ -23,6 +23,9 @@ export async function getSwapFee(
   const fullModulePath = `${MODULE_ADDRESS}::${MODULE_NAME}`;
   const functionName = 'get_swap_fee';
 
+  logger.info(`MODULE_ADDRESS: ${MODULE_ADDRESS}`);
+  logger.info(`MODULE_NAME: ${MODULE_NAME}`);
+
   const typeArgs: string[] = [];
   
   // Los args son los addresses de los tokens del par
@@ -38,6 +41,8 @@ export async function getSwapFee(
         typeArgs,
         functionArgs
     );
+
+    logger.info(`Response from get_swap_fee: ${JSON.stringify(response, null, 2)}`);
     
     logger.debug(`this is the response from call view function ${response}`)
     if (response && response.result && Array.isArray(response.result) && response.result.length === 1) {

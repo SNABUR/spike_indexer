@@ -166,12 +166,12 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": null,
-        "value": "file:./queue.db"
+        "value": "file:./queue.db?timeout=15000"
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/queue_db\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./queue.db\"\n}\n\nmodel Job {\n  id        Int      @id @default(autoincrement())\n  payload   Json\n  processed Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "23b396880996a975c283762c898c4b79b553f206ac9cd29133d801b4ea31f777",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/queue_db\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./queue.db?timeout=15000\"\n}\n\nmodel Job {\n  id        Int      @id @default(autoincrement())\n  payload   Json\n  processed Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "03d7a96e6bf8275e2a5bfe1ef7901661a2c32ce981e2d4b20071d2310c6fdbdd",
   "copyEngine": true
 }
 

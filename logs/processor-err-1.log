@@ -367,3 +367,383 @@
 2025-09-03T15:14:11: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
 2025-09-03T15:14:12: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
 2025-09-03T15:14:13: [processor-worker] ERROR: Error processing jobs: {"code":"P1008","meta":{"extra_hint":"— see https://pris.ly/d/sqlite-connector for more details"},"clientVersion":"6.14.0","name":"PrismaClientKnownRequestError"}
+2025-09-03T22:58:55: [2025-09-04T03:58:55.027Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:58:55: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:55: 
+2025-09-03T22:58:55: 
+2025-09-03T22:58:55: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:58:55: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:55: 
+2025-09-03T22:58:55: 
+2025-09-03T22:58:55: The table `main.Job` does not exist in the current database.
+2025-09-03T22:58:55:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:58:55:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:58:55:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:58:55:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:58:55:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:58:55:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:58:55:   code: 'P2021',
+2025-09-03T22:58:55:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:58:55:   clientVersion: '6.14.0'
+2025-09-03T22:58:55: }
+2025-09-03T22:58:56: [2025-09-04T03:58:56.023Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:58:56: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:56: 
+2025-09-03T22:58:56: 
+2025-09-03T22:58:56: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:58:56: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:56: 
+2025-09-03T22:58:56: 
+2025-09-03T22:58:56: The table `main.Job` does not exist in the current database.
+2025-09-03T22:58:56:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:58:56:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:58:56:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:58:56:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:58:56:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:58:56:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:58:56:   code: 'P2021',
+2025-09-03T22:58:56:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:58:56:   clientVersion: '6.14.0'
+2025-09-03T22:58:56: }
+2025-09-03T22:58:57: [2025-09-04T03:58:57.031Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:58:57: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:57: 
+2025-09-03T22:58:57: 
+2025-09-03T22:58:57: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:58:57: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:57: 
+2025-09-03T22:58:57: 
+2025-09-03T22:58:57: The table `main.Job` does not exist in the current database.
+2025-09-03T22:58:57:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:58:57:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:58:57:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:58:57:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:58:57:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:58:57:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:58:57:   code: 'P2021',
+2025-09-03T22:58:57:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:58:57:   clientVersion: '6.14.0'
+2025-09-03T22:58:57: }
+2025-09-03T22:58:58: [2025-09-04T03:58:58.029Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:58:58: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:58: 
+2025-09-03T22:58:58: 
+2025-09-03T22:58:58: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:58:58: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:58: 
+2025-09-03T22:58:58: 
+2025-09-03T22:58:58: The table `main.Job` does not exist in the current database.
+2025-09-03T22:58:58:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:58:58:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:58:58:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:58:58:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:58:58:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:58:58:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:58:58:   code: 'P2021',
+2025-09-03T22:58:58:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:58:58:   clientVersion: '6.14.0'
+2025-09-03T22:58:58: }
+2025-09-03T22:58:59: [2025-09-04T03:58:59.032Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:58:59: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:59: 
+2025-09-03T22:58:59: 
+2025-09-03T22:58:59: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:58:59: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:58:59: 
+2025-09-03T22:58:59: 
+2025-09-03T22:58:59: The table `main.Job` does not exist in the current database.
+2025-09-03T22:58:59:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:58:59:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:58:59:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:58:59:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:58:59:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:58:59:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:58:59:   code: 'P2021',
+2025-09-03T22:58:59:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:58:59:   clientVersion: '6.14.0'
+2025-09-03T22:58:59: }
+2025-09-03T22:59:00: [2025-09-04T03:59:00.018Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:59:00: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:59:00: 
+2025-09-03T22:59:00: 
+2025-09-03T22:59:00: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:59:00: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:59:00: 
+2025-09-03T22:59:00: 
+2025-09-03T22:59:00: The table `main.Job` does not exist in the current database.
+2025-09-03T22:59:00:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:59:00:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:59:00:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:59:00:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:59:00:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:59:00:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:59:00:   code: 'P2021',
+2025-09-03T22:59:00:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:59:00:   clientVersion: '6.14.0'
+2025-09-03T22:59:00: }
+2025-09-03T22:59:01: [2025-09-04T03:59:01.030Z] [PID: 11328] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T22:59:01: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:59:01: 
+2025-09-03T22:59:01: 
+2025-09-03T22:59:01: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T22:59:01: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T22:59:01: 
+2025-09-03T22:59:01: 
+2025-09-03T22:59:01: The table `main.Job` does not exist in the current database.
+2025-09-03T22:59:01:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T22:59:01:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T22:59:01:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T22:59:01:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T22:59:01:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T22:59:01:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T22:59:01:   code: 'P2021',
+2025-09-03T22:59:01:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T22:59:01:   clientVersion: '6.14.0'
+2025-09-03T22:59:01: }
+2025-09-03T23:01:09: [2025-09-04T04:01:09.029Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:09: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:09: 
+2025-09-03T23:01:09: 
+2025-09-03T23:01:09: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:09: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:09: 
+2025-09-03T23:01:09: 
+2025-09-03T23:01:09: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:09:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:09:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:09:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:09:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:09:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:09:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:09:   code: 'P2021',
+2025-09-03T23:01:09:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:09:   clientVersion: '6.14.0'
+2025-09-03T23:01:09: }
+2025-09-03T23:01:10: [2025-09-04T04:01:10.025Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:10: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:10: 
+2025-09-03T23:01:10: 
+2025-09-03T23:01:10: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:10: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:10: 
+2025-09-03T23:01:10: 
+2025-09-03T23:01:10: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:10:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:10:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:10:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:10:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:10:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:10:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:10:   code: 'P2021',
+2025-09-03T23:01:10:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:10:   clientVersion: '6.14.0'
+2025-09-03T23:01:10: }
+2025-09-03T23:01:11: [2025-09-04T04:01:11.028Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:11: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:11: 
+2025-09-03T23:01:11: 
+2025-09-03T23:01:11: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:11: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:11: 
+2025-09-03T23:01:11: 
+2025-09-03T23:01:11: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:11:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:11:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:11:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:11:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:11:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:11:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:11:   code: 'P2021',
+2025-09-03T23:01:11:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:11:   clientVersion: '6.14.0'
+2025-09-03T23:01:11: }
+2025-09-03T23:01:12: [2025-09-04T04:01:12.020Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:12: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:12: 
+2025-09-03T23:01:12: 
+2025-09-03T23:01:12: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:12: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:12: 
+2025-09-03T23:01:12: 
+2025-09-03T23:01:12: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:12:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:12:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:12:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:12:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:12:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:12:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:12:   code: 'P2021',
+2025-09-03T23:01:12:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:12:   clientVersion: '6.14.0'
+2025-09-03T23:01:12: }
+2025-09-03T23:01:13: [2025-09-04T04:01:13.026Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:13: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:13: 
+2025-09-03T23:01:13: 
+2025-09-03T23:01:13: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:13: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:13: 
+2025-09-03T23:01:13: 
+2025-09-03T23:01:13: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:13:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:13:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:13:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:13:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:13:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:13:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:13:   code: 'P2021',
+2025-09-03T23:01:13:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:13:   clientVersion: '6.14.0'
+2025-09-03T23:01:13: }
+2025-09-03T23:01:14: [2025-09-04T04:01:14.020Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:14: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:14: 
+2025-09-03T23:01:14: 
+2025-09-03T23:01:14: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:14: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:14: 
+2025-09-03T23:01:14: 
+2025-09-03T23:01:14: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:14:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:14:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:14:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:14:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:14:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:14:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:14:   code: 'P2021',
+2025-09-03T23:01:14:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:14:   clientVersion: '6.14.0'
+2025-09-03T23:01:14: }
+2025-09-03T23:01:15: [2025-09-04T04:01:15.026Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:15: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:15: 
+2025-09-03T23:01:15: 
+2025-09-03T23:01:15: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:15: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:15: 
+2025-09-03T23:01:15: 
+2025-09-03T23:01:15: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:15:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:15:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:15:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:15:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:15:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:15:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:15:   code: 'P2021',
+2025-09-03T23:01:15:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:15:   clientVersion: '6.14.0'
+2025-09-03T23:01:15: }
+2025-09-03T23:01:16: [2025-09-04T04:01:16.020Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:16: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:16: 
+2025-09-03T23:01:16: 
+2025-09-03T23:01:16: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:16: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:16: 
+2025-09-03T23:01:16: 
+2025-09-03T23:01:16: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:16:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:16:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:16:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:16:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:16:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:16:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:16:   code: 'P2021',
+2025-09-03T23:01:16:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:16:   clientVersion: '6.14.0'
+2025-09-03T23:01:16: }
+2025-09-03T23:01:17: [2025-09-04T04:01:17.020Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:17: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:17: 
+2025-09-03T23:01:17: 
+2025-09-03T23:01:17: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:17: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:17: 
+2025-09-03T23:01:17: 
+2025-09-03T23:01:17: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:17:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:17:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:17:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:17:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:17:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:17:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:17:   code: 'P2021',
+2025-09-03T23:01:17:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:17:   clientVersion: '6.14.0'
+2025-09-03T23:01:17: }
+2025-09-03T23:01:18: [2025-09-04T04:01:18.025Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:18: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:18: 
+2025-09-03T23:01:18: 
+2025-09-03T23:01:18: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:18: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:18: 
+2025-09-03T23:01:18: 
+2025-09-03T23:01:18: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:18:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:18:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:18:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:18:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:18:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:18:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:18:   code: 'P2021',
+2025-09-03T23:01:18:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:18:   clientVersion: '6.14.0'
+2025-09-03T23:01:18: }
+2025-09-03T23:01:19: [2025-09-04T04:01:19.030Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:19: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:19: 
+2025-09-03T23:01:19: 
+2025-09-03T23:01:19: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:19: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:19: 
+2025-09-03T23:01:19: 
+2025-09-03T23:01:19: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:19:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:19:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:19:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:19:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:19:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:19:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:19:   code: 'P2021',
+2025-09-03T23:01:19:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:19:   clientVersion: '6.14.0'
+2025-09-03T23:01:19: }
+2025-09-03T23:01:20: [2025-09-04T04:01:20.020Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:20: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:20: 
+2025-09-03T23:01:20: 
+2025-09-03T23:01:20: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:20: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:20: 
+2025-09-03T23:01:20: 
+2025-09-03T23:01:20: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:20:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:20:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:20:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:20:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:20:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:20:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:20:   code: 'P2021',
+2025-09-03T23:01:20:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:20:   clientVersion: '6.14.0'
+2025-09-03T23:01:20: }
+2025-09-03T23:01:21: [2025-09-04T04:01:21.019Z] [PID: 8452] [32m[NODE-CRON][32m [31m[ERROR][0m 
+2025-09-03T23:01:21: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:21: 
+2025-09-03T23:01:21: 
+2025-09-03T23:01:21: The table `main.Job` does not exist in the current database. PrismaClientKnownRequestError: 
+2025-09-03T23:01:21: Invalid `prisma.job.findMany()` invocation:
+2025-09-03T23:01:21: 
+2025-09-03T23:01:21: 
+2025-09-03T23:01:21: The table `main.Job` does not exist in the current database.
+2025-09-03T23:01:21:     at ei.handleRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:7283)
+2025-09-03T23:01:21:     at ei.handleAndLogRequestError (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6608)
+2025-09-03T23:01:21:     at ei.request (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:124:6315)
+2025-09-03T23:01:21:     at async a (D:\indexer_and_bot_telegram\spike_indexer\prisma\generated\queue_db\runtime\library.js:133:9551)
+2025-09-03T23:01:21:     at async processQueue (D:\indexer_and_bot_telegram\spike_indexer\src\processor-worker.ts:14:16)
+2025-09-03T23:01:21:     at async Timeout._onTimeout (D:\indexer_and_bot_telegram\spike_indexer\node_modules\node-cron\src\scheduler\runner.ts:100:30) {
+2025-09-03T23:01:21:   code: 'P2021',
+2025-09-03T23:01:21:   meta: { modelName: 'Job', table: 'main.Job' },
+2025-09-03T23:01:21:   clientVersion: '6.14.0'
+2025-09-03T23:01:21: }

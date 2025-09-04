@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./queue.db"
+  url      = "file:./queue.db?timeout=15000"
 }
 
 model Job {

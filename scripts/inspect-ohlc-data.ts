@@ -1,122 +1,51 @@
-
-import { PrismaClient as OhlcPrismaClient } from '../prisma/generated/ohlc_db';
+const { PrismaClient: OhlcPrismaClient } = require('../prisma/generated/ohlc_db');
 
 const ohlcDB = new OhlcPrismaClient();
 
-async function inspectOhlcData() {
+async function inspectOhlcForPair() {
+    const token0Address = '0x1::supra_coin::SupraCoin';
+    const token1Address = '0xe4af154ade9551e7f58a23b8f727ae2dca050f1b74582bb518ba361c889d246d';
 
-    console.log('--- Inspecting OHLC Data for SpikeySwap ---');
+    console.log(`--- Inspecting OHLC Data for pair ${token0Address} / ${token1Address} ---`);
 
     try {
-
-        const latestRecord = await ohlcDB.ohlcData.findFirst({
+        const records = await ohlcDB.ohlcData.findMany({
             where: {
-                ammSource: 'SpikeySwap',
+                OR: [
+                    {
+                        token0Address: token0Address,
+                        token1Address: token1Address,
+                    },
+                    {
+                        token0Address: token1Address,
+                        token1Address: token0Address,
+                    },
+                ],
             },
             orderBy: {
                 timestamp: 'desc',
             },
+            take: 20,
         });
 
-        console.log('Latest OHLC record (any timeframe, SpikeySwap):', latestRecord);
-
-        const latest_1d_Record = await ohlcDB.ohlcData.findFirst({
-            where: {
-                timeframe: '1d',
-                ammSource: 'SpikeySwap',
-            },
-            orderBy: {
-                timestamp: 'desc',
-            },
-        });
-
-        console.log('Latest OHLC record (1d timeframe, SpikeySwap):', latest_1d_Record);
-
-
-        const sevenDaysAgo = new Date();
-
-        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-        const recentRecordsCount = await ohlcDB.ohlcData.count({
-
-            where: {
-                ammSource: 'SpikeySwap',
-                timestamp: {
-
-                    gte: sevenDaysAgo,
-
-                },
-
-            },
-
-        });
-
-        console.log(`Found ${recentRecordsCount} records in the last 7 days (any timeframe, SpikeySwap).`);
-
-        const recent_1d_RecordsCount = await ohlcDB.ohlcData.count({
-
-            where: {
-                timeframe: '1d',
-                ammSource: 'SpikeySwap',
-                timestamp: {
-
-                    gte: sevenDaysAgo,
-
-                },
-
-            },
-
-        });
-
-        console.log(`Found ${recent_1d_RecordsCount} records in the last 7 days (1d timeframe, SpikeySwap).`);
-
-
-        const sampleRecords = await ohlcDB.ohlcData.findMany({
-            where: {
-                ammSource: 'SpikeySwap',
-            },
-            take: 5,
-
-            orderBy: {
-
-                timestamp: 'desc',
-
-            },
-
-        });
-
-        console.log('Sample OHLC records (any timeframe, SpikeySwap):', sampleRecords);
-
-
-        const sample_1d_Records = await ohlcDB.ohlcData.findMany({
-            where: {
-                timeframe: '1d',
-                ammSource: 'SpikeySwap',
-            },
-            take: 5,
-
-            orderBy: {
-
-                timestamp: 'desc',
-
-            },
-
-        });
-
-        console.log('Sample OHLC records (1d timeframe, SpikeySwap):', sample_1d_Records);
-
-
+        if (records.length === 0) {
+            console.log('No OHLC data found for this pair.');
+        } else {
+            console.log('Found OHLC records:');
+            console.table(records.map(r => ({
+                ...r,
+                open: r.open.toString(),
+                high: r.high.toString(),
+                low: r.low.toString(),
+                close: r.close.toString(),
+                volume: r.volume.toString(),
+            })));
+        }
     } catch (error) {
-
         console.error('Error inspecting OHLC data:', error);
-
     } finally {
-
         await ohlcDB.$disconnect();
-
     }
-
 }
 
-inspectOhlcData();
-
+inspectOhlcForPair();

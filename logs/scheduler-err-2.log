@@ -1,0 +1,6 @@
+2025-09-03T23:49:03: [getSwapFee-hook] ERROR: Error calling view function get_swap_fee for on testnet: {}
+2025-09-03T23:49:04: [getSwapFee-hook] ERROR: Error calling view function get_swap_fee for on mainnet: {}
+2025-09-04T00:04:02: [executeGetReserves-task] ERROR: ❌ Configuración de RPC faltante para la red: testnet
+2025-09-04T00:04:02: [getSwapFee-hook] ERROR: Error calling view function get_swap_fee for on testnet: {}
+2025-09-04T00:04:03: [executeGetReserves-task] ERROR: ❌ Configuración de RPC faltante para la red: mainnet
+2025-09-04T00:04:03: [getSwapFee-hook] ERROR: Error calling view function get_swap_fee for on mainnet: {}
