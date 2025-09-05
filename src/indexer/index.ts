@@ -56,7 +56,7 @@ export async function startIndexer() {
     if (pollers.mainnet) logger.info(`Poller ${POLLER_IDS.MAINNET} status: running (assumed)`);
     // Importante: Pasar la schedulerConfig aquí también si la lógica lo requiere,
     // aunque startScheduledTasks tiene su propia lógica para no reinicializar si ya hay jobs.
-    startScheduledTasks(schedulerConfig); 
+    await startScheduledTasks(schedulerConfig); // Añadir await aquí
     return;
   }
 
@@ -119,8 +119,15 @@ export async function startIndexer() {
      logger.warn('No pollers were configured or started, but scheduler config provided. Attempting to start scheduled tasks.');
   }
 
-  // La schedulerConfig ya contiene los networkName correctos
-  startScheduledTasks(schedulerConfig);
+  try {
+    logger.info('Starting scheduled tasks and performing initial sync...');
+    await startScheduledTasks(schedulerConfig); // <-- LA LLAMADA CORRECTA, CON AWAIT
+    logger.info('Scheduled tasks started and initial sync completed.');
+  } catch (error) {
+    logger.error('CRITICAL: Failed to start scheduled tasks. Indexer startup will halt.', error);
+    indexerActive = false;
+    return; // Detenemos el inicio si las tareas programadas (y la sincronización) fallan
+  }
 
   if (startingPollers.length > 0) {
     try {
