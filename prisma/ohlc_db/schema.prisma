@@ -19,6 +19,7 @@ model Token {
     decimals          Int
     maxSupply         BigInt?
     circulatingSupply BigInt?
+    minTradeVolume    Decimal?
     pairsAsToken0 Pair[] @relation("token0")
     pairsAsToken1 Pair[] @relation("token1")
     groupConfigurations GroupConfiguration[]
@@ -39,6 +40,9 @@ model Pair {
     token1 Token @relation("token1", fields: [token1Id], references: [id])
     createdAt DateTime @default(now())
     @@unique([network, token0Id, token1Id])
+    @@unique([network, spikeyAmmPairAddress])
+    @@index([token0Id])
+    @@index([token1Id])
 }
 
 model OhlcData {
@@ -58,6 +62,10 @@ model OhlcData {
     token0Address String
     token1Address String
     @@unique([network, ammSource, token0Address, token1Address, timeframe, timestamp])
+    @@index([token0Address])
+    @@index([token1Address])
+    @@index([timestamp])
+    @@index([network, token0Address, token1Address, timeframe, timestamp(sort: Desc)])
 }
 
 model GroupConfiguration {
