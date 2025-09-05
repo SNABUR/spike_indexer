@@ -20,9 +20,9 @@ export async function executeUpdateAmmData(spikeDB: PrismaClient, config: Networ
     // 1. OBTENER DATOS
     const baseData = await fetchBaseData(spikeDB, config);
     const ammPairs = await fetchAmmPairsToProcess(spikeDB, config);
-    const volumes24h = await fetch24hVolumeData(ohlcDB, config, baseData.pricesMap, baseData.legacyToWrappedMap);
-    const volumes7d = await fetch7dVolumeData(ohlcDB, config, baseData.pricesMap, baseData.legacyToWrappedMap);
-    const volumes30d = await fetch30dVolumeData(ohlcDB, config, baseData.pricesMap, baseData.legacyToWrappedMap);
+    const volumes24h = await fetch24hVolumeData(ohlcDB, spikeDB, config, baseData.pricesMap, baseData.wrappedToLegacyMap, baseData.legacyToWrappedMap);
+    const volumes7d = await fetch7dVolumeData(ohlcDB, spikeDB, config, baseData.pricesMap, baseData.wrappedToLegacyMap, baseData.legacyToWrappedMap);
+    const volumes30d = await fetch30dVolumeData(ohlcDB, spikeDB, config, baseData.pricesMap, baseData.wrappedToLegacyMap, baseData.legacyToWrappedMap);
     logger.info(`[${config.networkName}] Datos base cargados, ${ammPairs.length} pares con reservas encontrados para procesar.`);
 
     // 2. PROCESAR DATOS Y PREPARAR ACTUALIZACIONES

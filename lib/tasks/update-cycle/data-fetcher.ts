@@ -14,6 +14,7 @@ export interface BaseData {
     decimalsMap: Map<string, number>;
     swapFeeBps: string | null;
     legacyToWrappedMap: Map<string, string>;
+    wrappedToLegacyMap: Map<string, string>;
 }
 
 // --- Funciones de Obtención de Datos ---
@@ -28,12 +29,14 @@ export async function fetchBaseData(spikeDB: MainPrismaClient, config: NetworkCo
 
     const decimalsMap = new Map<string, number>();
     const legacyToWrappedMap = new Map<string, string>();
+    const wrappedToLegacyMap = new Map<string, string>();
 
     tokens.forEach(t => {
         if (t.decimals !== null) decimalsMap.set(t.id, t.decimals);
         // Si el token tiene un originalCoinType, es una moneda legacy. Mapeamos su dirección legacy a su ID (que es la dirección wrapped).
         if (t.originalCoinType) {
             legacyToWrappedMap.set(t.originalCoinType, t.id);
+            wrappedToLegacyMap.set(t.id, t.originalCoinType);
         }
     });
 
@@ -45,6 +48,7 @@ export async function fetchBaseData(spikeDB: MainPrismaClient, config: NetworkCo
         decimalsMap,
         swapFeeBps: swapFeeResult ? swapFeeResult[0] : null,
         legacyToWrappedMap,
+        wrappedToLegacyMap,
     };
 }
 
@@ -66,40 +70,52 @@ export async function fetchAmmPairsToProcess(spikeDB: MainPrismaClient, config: 
  * Obtiene el volumen de las últimas 24 horas para cada par desde la DB de OHLC.
  * Utiliza el timeframe '1d' pre-agregado y lo convierte a USD.
  */
-export async function fetch24hVolumeData(ohlcDB: OhlcPrismaClient, config: NetworkConfig, pricesMap: Map<string, Decimal>, legacyToWrappedMap: Map<string, string>): Promise<VolumeMap> {
-    const latestTimestampResult = await ohlcDB.ohlcData.findFirst({
-        where: { network: config.networkName, timeframe: '1d' /*, ammSource: 'SpikeySwap' */ }, // ammSource opcional si solo hay uno
-        orderBy: { timestamp: 'desc' },
-        select: { timestamp: true }
+export async function fetch24hVolumeData(
+    ohlcDB: OhlcPrismaClient,
+    spikeDB: MainPrismaClient,
+    config: NetworkConfig,
+    pricesMap: Map<string, Decimal>,
+    wrappedToLegacyMap: Map<string, string>,
+    legacyToWrappedMap: Map<string, string>
+): Promise<VolumeMap> {
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+    const allPairs = await spikeDB.ammpair.findMany({
+        where: { network: config.networkName },
     });
 
     const volumeMap: VolumeMap = new Map();
-    if (!latestTimestampResult) return volumeMap;
 
-    const result = await ohlcDB.ohlcData.findMany({
-        where: {
-            network: config.networkName,
-            timeframe: '1d',
-            // ammSource: 'SpikeySwap',
-            timestamp: latestTimestampResult.timestamp,
-        },
-    });
+    for (const pair of allPairs) {
+        const legacyToken0 = wrappedToLegacyMap.get(pair.token0Address) ?? pair.token0Address;
+        const legacyToken1 = wrappedToLegacyMap.get(pair.token1Address) ?? pair.token1Address;
 
-    for (const ohlc of result) {
-        const wrappedToken0 = legacyToWrappedMap.get(ohlc.token0Address) ?? ohlc.token0Address;
-        const wrappedToken1 = legacyToWrappedMap.get(ohlc.token1Address) ?? ohlc.token1Address;
-        const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
+        const result = await ohlcDB.ohlcData.groupBy({
+            by: ['token0Address', 'token1Address'],
+            where: {
+                network: config.networkName,
+                ammSource: 'SpikeySwap',
+                timeframe: '1d',
+                OR: [
+                    { token0Address: legacyToken0, token1Address: legacyToken1 },
+                    { token0Address: legacyToken1, token1Address: legacyToken0 },
+                ],
+                timestamp: { gte: twentyFourHoursAgo },
+            },
+            _sum: { volume: true },
+        });
 
-        // --- INICIO DE LA CORRECCIÓN ---
-        // El 'volume' en ohlcData AHORA SIEMPRE está en términos de token1 (nuestra moneda de cotización canónica).
-        const volumeInToken1 = ohlc.volume ?? new Decimal(0);
-        // Por lo tanto, para convertir a USD, debemos usar el precio de token1.
-        const priceToken1 = pricesMap.get(wrappedToken1);
+        for (const group of result) {
+            const wrappedToken0 = legacyToWrappedMap.get(group.token0Address) ?? group.token0Address;
+            const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
+            const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        const volumeUsd = priceToken1 ? volumeInToken1.mul(priceToken1) : new Decimal(0);
-        // --- FIN DE LA CORRECCIÓN ---
-        
-        volumeMap.set(key, volumeUsd);
+            const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
+            const priceToken1 = pricesMap.get(wrappedToken1);
+            const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
+            volumeMap.set(key, volumeUsd);
+        }
     }
 
     return volumeMap;
@@ -109,37 +125,52 @@ export async function fetch24hVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
  * Obtiene el volumen de los últimos 7 días para cada par desde la DB de OHLC.
  * Suma los volúmenes de los últimos 7 registros con timeframe '1d' y los convierte a USD.
  */
-export async function fetch7dVolumeData(ohlcDB: OhlcPrismaClient, config: NetworkConfig, pricesMap: Map<string, Decimal>, legacyToWrappedMap: Map<string, string>): Promise<VolumeMap> {
+export async function fetch7dVolumeData(
+    ohlcDB: OhlcPrismaClient,
+    spikeDB: MainPrismaClient,
+    config: NetworkConfig,
+    pricesMap: Map<string, Decimal>,
+    wrappedToLegacyMap: Map<string, string>,
+    legacyToWrappedMap: Map<string, string>
+): Promise<VolumeMap> {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    const result = await ohlcDB.ohlcData.groupBy({
-        by: ['token0Address', 'token1Address'],
-        where: {
-            network: config.networkName,
-            timeframe: '1d',
-            // ammSource: 'SpikeySwap',
-            timestamp: { gte: sevenDaysAgo },
-        },
-        _sum: { volume: true },
+    const allPairs = await spikeDB.ammpair.findMany({
+        where: { network: config.networkName },
     });
 
     const volumeMap: VolumeMap = new Map();
-    for (const group of result) {
-        const wrappedToken0 = legacyToWrappedMap.get(group.token0Address) ?? group.token0Address;
-        const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
-        const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        // --- INICIO DE LA CORRECCIÓN ---
-        // El 'volume' sumado SIEMPRE está en términos de token1.
-        const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
-        // Usamos el precio de token1 para convertir a USD.
-        const priceToken1 = pricesMap.get(wrappedToken1);
+    for (const pair of allPairs) {
+        const legacyToken0 = wrappedToLegacyMap.get(pair.token0Address) ?? pair.token0Address;
+        const legacyToken1 = wrappedToLegacyMap.get(pair.token1Address) ?? pair.token1Address;
 
-        const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
-        // --- FIN DE LA CORRECCIÓN ---
+        const result = await ohlcDB.ohlcData.groupBy({
+            by: ['token0Address', 'token1Address'],
+            where: {
+                network: config.networkName,
+                ammSource: 'SpikeySwap',
+                timeframe: '1d',
+                OR: [
+                    { token0Address: legacyToken0, token1Address: legacyToken1 },
+                    { token0Address: legacyToken1, token1Address: legacyToken0 },
+                ],
+                timestamp: { gte: sevenDaysAgo },
+            },
+            _sum: { volume: true },
+        });
 
-        volumeMap.set(key, volumeUsd);
+        for (const group of result) {
+            const wrappedToken0 = legacyToWrappedMap.get(group.token0Address) ?? group.token0Address;
+            const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
+            const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
+
+            const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
+            const priceToken1 = pricesMap.get(wrappedToken1);
+            const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
+            volumeMap.set(key, volumeUsd);
+        }
     }
 
     return volumeMap;
@@ -148,37 +179,52 @@ export async function fetch7dVolumeData(ohlcDB: OhlcPrismaClient, config: Networ
  * Obtiene el volumen de los últimos 30 días para cada par desde la DB de OHLC.
  * Suma los volúmenes de los últimos 30 registros con timeframe '1d' y los convierte a USD.
  */
-export async function fetch30dVolumeData(ohlcDB: OhlcPrismaClient, config: NetworkConfig, pricesMap: Map<string, Decimal>, legacyToWrappedMap: Map<string, string>): Promise<VolumeMap> {
+export async function fetch30dVolumeData(
+    ohlcDB: OhlcPrismaClient,
+    spikeDB: MainPrismaClient,
+    config: NetworkConfig,
+    pricesMap: Map<string, Decimal>,
+    wrappedToLegacyMap: Map<string, string>,
+    legacyToWrappedMap: Map<string, string>
+): Promise<VolumeMap> {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-    const result = await ohlcDB.ohlcData.groupBy({
-        by: ['token0Address', 'token1Address'],
-        where: {
-            network: config.networkName,
-            timeframe: '1d',
-            // ammSource: 'SpikeySwap',
-            timestamp: { gte: thirtyDaysAgo },
-        },
-        _sum: { volume: true },
+    const allPairs = await spikeDB.ammpair.findMany({
+        where: { network: config.networkName },
     });
 
     const volumeMap: VolumeMap = new Map();
-    for (const group of result) {
-        const wrappedToken0 = legacyToWrappedMap.get(group.token0Address) ?? group.token0Address;
-        const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
-        const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        // --- INICIO DE LA CORRECCIÓN ---
-        // El 'volume' sumado SIEMPRE está en términos de token1.
-        const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
-        // Usamos el precio de token1 para convertir a USD.
-        const priceToken1 = pricesMap.get(wrappedToken1);
+    for (const pair of allPairs) {
+        const legacyToken0 = wrappedToLegacyMap.get(pair.token0Address) ?? pair.token0Address;
+        const legacyToken1 = wrappedToLegacyMap.get(pair.token1Address) ?? pair.token1Address;
 
-        const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
-        // --- FIN DE LA CORRECCIÓN ---
+        const result = await ohlcDB.ohlcData.groupBy({
+            by: ['token0Address', 'token1Address'],
+            where: {
+                network: config.networkName,
+                ammSource: 'SpikeySwap',
+                timeframe: '1d',
+                OR: [
+                    { token0Address: legacyToken0, token1Address: legacyToken1 },
+                    { token0Address: legacyToken1, token1Address: legacyToken0 },
+                ],
+                timestamp: { gte: thirtyDaysAgo },
+            },
+            _sum: { volume: true },
+        });
 
-        volumeMap.set(key, volumeUsd);
+        for (const group of result) {
+            const wrappedToken0 = legacyToWrappedMap.get(group.token0Address) ?? group.token0Address;
+            const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
+            const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
+
+            const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
+            const priceToken1 = pricesMap.get(wrappedToken1);
+            const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
+            volumeMap.set(key, volumeUsd);
+        }
     }
 
     return volumeMap;

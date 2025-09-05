@@ -26,6 +26,37 @@ The `spike_indexer` has been transformed into a dedicated, robust backend servic
         *   **Persistence:** If either worker crashes, the jobs in the queue are not lost. They remain in the SQLite database and will be picked up when the workers restart.
         *   **No Impact on Main DB:** This queue is entirely separate from your main PostgreSQL database.
 
+---
+
+### Data Standardization: Canonical Token Order and Volume Calculation
+
+A critical improvement in the new architecture is the standardization of analytical data, particularly for OHLC (Open, High, Low, Close) information. This ensures that metrics like volume and APR are calculated consistently and accurately across all trading pairs.
+
+#### Canonical Token Order
+
+To remove ambiguity, the system now enforces a strict, predictable order for tokens within any given pair for analytical purposes. When OHLC data is generated, pairs are organized into a `token0` and `token1` based on the following hierarchy of rules, managed by an `AnchorToken` table in the database:
+
+1.  **Primary Reference Token (e.g., SUPRA):** If SUPRA is in the pair, it is **always `token0`**.
+2.  **Stablecoins (e.g., USDT, USDC):** If there is no SUPRA but there is a stablecoin, the stablecoin is **always `token0`**.
+3.  **Alphabetical Order:** If neither token is an anchor, they are sorted alphabetically by their contract address. The first one becomes `token0`.
+
+This ensures that for any pair, we always know which token is the "base" (`token0`) and which is the "quote" (`token1`).
+
+#### Standardized Volume Calculation
+
+The most significant change is how trading volume is calculated and stored.
+
+*   **The Problem:** Raw trading volume is ambiguous. A trade of 1 SUPRA for 50,000 MEME has a volume of "1 SUPRA" from one perspective and "50,000 MEME" from another. Simply summing the input amounts of trades results in a meaningless mix of different token units.
+*   **The Solution:** The `ohlc-aggregator` now standardizes all volume calculations. For every trade, the volume is converted to its equivalent value in the **canonical `token1`** of the pair.
+
+**Practical Example:**
+*   For a `MEME/SUPRA` pair, the canonical order is `token0=SUPRA`, `token1=MEME`. All volume is calculated and stored in **MEME**.
+*   For a `MEME/USDT` pair, the canonical order is `token0=USDT`, `token1=MEME`. All volume is calculated and stored in **MEME**.
+
+This guarantees that the `volume` field in the `OhlcData` table always represents a consistent unit (`token1`), allowing downstream processes like the `data-fetcher` to reliably convert it to USD by multiplying it with the price of `token1`.
+
+---
+
 ### Operational Behavior: Improved Efficiency and Reliability
 
 *   **Core Functionality:** The system still performs the exact same core tasks: it fetches blockchain events, processes them (e.g., handles trades, updates AMM data, calculates OHLC), and stores the results in your main database. The data being indexed and the final state in your database should be identical to what it was before.

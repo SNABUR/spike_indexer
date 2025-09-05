@@ -21,7 +21,7 @@ function calculate24hApr(pairTvlUsd: Decimal, volume24h: Decimal, baseData: Base
     const dailyApr = totalFeesUsd24h.div(pairTvlUsd);
     const yearlyApr = dailyApr.mul(365).mul(100); // Anualizado y en porcentaje
 
-    return yearlyApr.toFixed(2);
+    return yearlyApr.toString();
 }
 
 /**
@@ -44,7 +44,7 @@ function calculate7dApr(pairTvlUsd: Decimal, volume7d: Decimal, baseData: BaseDa
     const dailyApr = averageDailyFees.div(pairTvlUsd);
     const yearlyApr = dailyApr.mul(365).mul(100); // Anualizado y en porcentaje
 
-    return yearlyApr.toFixed(2);
+    return yearlyApr.toString();
 }
 
 /**
@@ -63,7 +63,7 @@ function calculateApy(apr: string | null): string | null {
     const n = 365;
     const apy = new Decimal(1).plus(aprDecimal.div(n)).pow(n).minus(1).mul(100);
 
-    return apy.toFixed(2);
+    return apy.toString();
 }
 
 
@@ -116,17 +116,17 @@ export function processAmmPairs(ammPairs: Ammpair[], volumes24h: VolumeMap, volu
         // No actualizamos reserve0 y reserve1 porque son nuestra fuente de verdad.
         // Solo actualizamos los campos calculados.
         const updateData: any = {
-            tvlUsd: pairTvlUsd.toFixed(6),
+            tvlUsd: pairTvlUsd.toString(),
             lastStatsUpdate: new Date(),
             apr24h: apr24h,
-            volumeUsd24h: volume24h.toFixed(6),
+            volumeUsd24h: volume24h.toString(),
             apr7d: apr7d,
-            volumeUsd7d: volume7d.toFixed(6),
-            volumeUsd30d: volume30d.toFixed(6),
+            volumeUsd7d: volume7d.toString(),
+            volumeUsd30d: volume30d.toString(),
             apyCalculated: apyCalculated,
-            feesUsd24h: feesUsd24h.toFixed(6),
-            feesUsd7d: feesUsd7d.toFixed(6),
-            feesUsd30d: feesUsd30d.toFixed(6),
+            feesUsd24h: feesUsd24h.toString(),
+            feesUsd7d: feesUsd7d.toString(),
+            feesUsd30d: feesUsd30d.toString(),
         };
 
         console.log('Update Data for Pair:', pair.pair, JSON.stringify(updateData, null, 2));

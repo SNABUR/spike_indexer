@@ -406,3 +406,5 @@
 2025-09-05T07:03:19: [rpcClient] ERROR: HTTP error 503 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::PumpEvent on https://rpc-mainnet.supra.com/rpc/v1: upstream connect error or disconnect/reset before headers. reset reason: connection termination
 2025-09-05T07:03:36: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TransferEvent on https://rpc-mainnet.supra.com/rpc/v1: 
 2025-09-05T09:35:49: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TradeEvent on https://rpc-mainnet.supra.com/rpc/v1: 
+2025-09-05T11:20:48: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TradeEvent on https://rpc-mainnet.supra.com/rpc/v1: 
+2025-09-05T13:19:53: [rpcClient] ERROR: HTTP error 408 for 0x3045d27b5fada1e30897a741fb184e48ef0bff3717aea23918ebc1e5c7153083::amm_factory::PairCreatedEvent on https://rpc-mainnet.supra.com/rpc/v1: 
