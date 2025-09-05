@@ -403,3 +403,5 @@
 2025-09-04T00:08:55: [rpcClient] ERROR: HTTP error 408 for 0x543d8dbe69622068d314026f43d967070158b9ace8c3b2f40d92d1229c65b970::spike_game::GameResult on https://rpc-testnet.supra.com/rpc/v1: 
 2025-09-04T00:09:08: [rpcClient] ERROR: Error fetching latest block height from https://rpc-mainnet.supra.com/rpc/v1: {}
 2025-09-04T00:09:08: [poller] ERROR: [supra-mainnet] Error fetching latest block height: HTTP error! status: 408 from https://rpc-mainnet.supra.com/rpc/v1
+2025-09-05T07:03:19: [rpcClient] ERROR: HTTP error 503 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::PumpEvent on https://rpc-mainnet.supra.com/rpc/v1: upstream connect error or disconnect/reset before headers. reset reason: connection termination
+2025-09-05T07:03:36: [rpcClient] ERROR: HTTP error 408 for 0x2e1e06a4d4d16fb89474347f51370e06318100d01982f57d6d1d7f8293e795b5::spike_fun::TransferEvent on https://rpc-mainnet.supra.com/rpc/v1: 

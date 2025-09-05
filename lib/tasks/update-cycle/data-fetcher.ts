@@ -68,29 +68,19 @@ export async function fetchAmmPairsToProcess(spikeDB: MainPrismaClient, config: 
  */
 export async function fetch24hVolumeData(ohlcDB: OhlcPrismaClient, config: NetworkConfig, pricesMap: Map<string, Decimal>, legacyToWrappedMap: Map<string, string>): Promise<VolumeMap> {
     const latestTimestampResult = await ohlcDB.ohlcData.findFirst({
-        where: {
-            network: config.networkName,
-            timeframe: '1d',
-            ammSource: 'SpikeySwap',
-        },
-        orderBy: {
-            timestamp: 'desc',
-        },
-        select: {
-            timestamp: true,
-        }
+        where: { network: config.networkName, timeframe: '1d' /*, ammSource: 'SpikeySwap' */ }, // ammSource opcional si solo hay uno
+        orderBy: { timestamp: 'desc' },
+        select: { timestamp: true }
     });
 
     const volumeMap: VolumeMap = new Map();
-    if (!latestTimestampResult) {
-        return volumeMap;
-    }
+    if (!latestTimestampResult) return volumeMap;
 
     const result = await ohlcDB.ohlcData.findMany({
         where: {
             network: config.networkName,
             timeframe: '1d',
-            ammSource: 'SpikeySwap',
+            // ammSource: 'SpikeySwap',
             timestamp: latestTimestampResult.timestamp,
         },
     });
@@ -100,11 +90,14 @@ export async function fetch24hVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
         const wrappedToken1 = legacyToWrappedMap.get(ohlc.token1Address) ?? ohlc.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        // CORRECCIÓN: El volumen en OHLC está en términos de token0 (SUPRA).
-        const volumeInSupra = ohlc.volume ?? new Decimal(0);
-        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
+        // --- INICIO DE LA CORRECCIÓN ---
+        // El 'volume' en ohlcData AHORA SIEMPRE está en términos de token1 (nuestra moneda de cotización canónica).
+        const volumeInToken1 = ohlc.volume ?? new Decimal(0);
+        // Por lo tanto, para convertir a USD, debemos usar el precio de token1.
+        const priceToken1 = pricesMap.get(wrappedToken1);
 
-        const volumeUsd = priceToken0 ? volumeInSupra.mul(priceToken0) : new Decimal(0);
+        const volumeUsd = priceToken1 ? volumeInToken1.mul(priceToken1) : new Decimal(0);
+        // --- FIN DE LA CORRECCIÓN ---
         
         volumeMap.set(key, volumeUsd);
     }
@@ -125,14 +118,10 @@ export async function fetch7dVolumeData(ohlcDB: OhlcPrismaClient, config: Networ
         where: {
             network: config.networkName,
             timeframe: '1d',
-            ammSource: 'SpikeySwap',
-            timestamp: { 
-                gte: sevenDaysAgo 
-            },
+            // ammSource: 'SpikeySwap',
+            timestamp: { gte: sevenDaysAgo },
         },
-        _sum: {
-            volume: true,
-        },
+        _sum: { volume: true },
     });
 
     const volumeMap: VolumeMap = new Map();
@@ -141,18 +130,20 @@ export async function fetch7dVolumeData(ohlcDB: OhlcPrismaClient, config: Networ
         const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).
-        const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);
-        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
+        // --- INICIO DE LA CORRECCIÓN ---
+        // El 'volume' sumado SIEMPRE está en términos de token1.
+        const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
+        // Usamos el precio de token1 para convertir a USD.
+        const priceToken1 = pricesMap.get(wrappedToken1);
 
-        const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);
+        const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
+        // --- FIN DE LA CORRECCIÓN ---
 
         volumeMap.set(key, volumeUsd);
     }
 
     return volumeMap;
 }
-
 /**
  * Obtiene el volumen de los últimos 30 días para cada par desde la DB de OHLC.
  * Suma los volúmenes de los últimos 30 registros con timeframe '1d' y los convierte a USD.
@@ -166,14 +157,10 @@ export async function fetch30dVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
         where: {
             network: config.networkName,
             timeframe: '1d',
-            ammSource: 'SpikeySwap',
-            timestamp: { 
-                gte: thirtyDaysAgo 
-            },
+            // ammSource: 'SpikeySwap',
+            timestamp: { gte: thirtyDaysAgo },
         },
-        _sum: {
-            volume: true,
-        },
+        _sum: { volume: true },
     });
 
     const volumeMap: VolumeMap = new Map();
@@ -182,11 +169,14 @@ export async function fetch30dVolumeData(ohlcDB: OhlcPrismaClient, config: Netwo
         const wrappedToken1 = legacyToWrappedMap.get(group.token1Address) ?? group.token1Address;
         const key = [wrappedToken0, wrappedToken1].sort().join('-').toLowerCase();
 
-        // CORRECCIÓN: El volumen sumado está en términos de token0 (SUPRA).
-        const totalVolumeInSupra = group._sum.volume ?? new Decimal(0);
-        const priceToken0 = pricesMap.get(wrappedToken0); // Usar el precio de SUPRA
+        // --- INICIO DE LA CORRECCIÓN ---
+        // El 'volume' sumado SIEMPRE está en términos de token1.
+        const totalVolumeInToken1 = group._sum.volume ?? new Decimal(0);
+        // Usamos el precio de token1 para convertir a USD.
+        const priceToken1 = pricesMap.get(wrappedToken1);
 
-        const volumeUsd = priceToken0 ? totalVolumeInSupra.mul(priceToken0) : new Decimal(0);
+        const volumeUsd = priceToken1 ? totalVolumeInToken1.mul(priceToken1) : new Decimal(0);
+        // --- FIN DE LA CORRECCIÓN ---
 
         volumeMap.set(key, volumeUsd);
     }

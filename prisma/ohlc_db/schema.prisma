@@ -9,6 +9,21 @@ datasource ohlc_db {
     directUrl = env("CHART_DIRECT_URL")
 }
 
+model AnchorToken {
+  id        Int      @id @default(autoincrement())
+  network   String
+  priority  Int
+  category  String
+
+  tokenAddress String
+
+  token     Token    @relation(fields: [network, tokenAddress], references: [network, address])
+
+  @@unique([network, tokenAddress])
+  @@index([network, priority])
+}
+
+
 model Token {
     id      Int    @id @default(autoincrement())
     network String
@@ -24,6 +39,7 @@ model Token {
     pairsAsToken1 Pair[] @relation("token1")
     groupConfigurations GroupConfiguration[]
     createdAt DateTime @default(now())
+    anchorInfo      AnchorToken?
     @@unique([network, address])
 }
 
