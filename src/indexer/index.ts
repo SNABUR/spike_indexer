@@ -38,14 +38,12 @@ export async function startIndexer() {
   if (SUPRA_RPC_URL_TESTNET && CHAIN_ID_SUPRA_TESTNET) {
     schedulerConfig.testnet = {
       rpcUrl: SUPRA_RPC_URL_TESTNET,
-      chainId: CHAIN_ID_SUPRA_TESTNET,
       networkName: POLLER_IDS.TESTNET // Usamos la constante POLLER_IDS
     };
   }
   if (SUPRA_RPC_URL_MAINNET && CHAIN_ID_SUPRA_MAINNET) {
     schedulerConfig.mainnet = {
       rpcUrl: SUPRA_RPC_URL_MAINNET,
-      chainId: CHAIN_ID_SUPRA_MAINNET,
       networkName: POLLER_IDS.MAINNET // Usamos la constante POLLER_IDS
     };
   }

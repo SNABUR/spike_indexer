@@ -12,7 +12,6 @@ async function main() {
   const spikeDB = new PrismaClient();
   const config: NetworkConfigType = {
     rpcUrl: process.env.NEXT_PUBLIC_SUPRA_RPC_URL_MAINNET || '',
-    chainId: 'supra-mainnet', // This is not in the .env file, but it is not used in the script
     networkName: process.env.NEXT_PUBLIC_SUPRA_MAINNET || 'supra-mainnet',
   };
 

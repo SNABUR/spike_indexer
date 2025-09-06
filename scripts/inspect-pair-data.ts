@@ -11,7 +11,6 @@ async function inspectPair(pairAddress: string, network: string) {
   const config: NetworkConfig = {
     networkName: network,
     rpcUrl: '', // Not needed for this script
-    chainId: '0', // Not needed for this script
   };
 
   const baseData = await fetchBaseData(spikeDB, config);

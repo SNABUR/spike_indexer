@@ -10,14 +10,12 @@ const logger = createLogger('scheduler-worker');
 logger.info('Scheduler worker starting...');
 
 const testnetConfig = {
-  rpcUrl: process.env.APTOS_TESTNET_RPC_URL || '',
-  chainId: process.env.APTOS_TESTNET_CHAIN_ID || '',
+  rpcUrl: process.env.NEXT_PUBLIC_SUPRA_RPC_URL_TESTNET || '',
   networkName: 'supra-testnet',
 };
 
 const mainnetConfig = {
-  rpcUrl: process.env.APTOS_MAINNET_RPC_URL || '',
-  chainId: process.env.APTOS_MAINNET_CHAIN_ID || '',
+  rpcUrl: process.env.NEXT_PUBLIC_SUPRA_RPC_URL_MAINNET || '',
   networkName: 'supra-mainnet',
 };
 

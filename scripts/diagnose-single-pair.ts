@@ -15,7 +15,7 @@ async function diagnosePair(pairAddress: string, network: string) {
 
     // 1. OBTENER DATOS BASE
     console.log('1. Obteniendo datos base...');
-    const config: NetworkConfig = { networkName: network, rpcUrl: '', chainId: '0' };
+    const config: NetworkConfig = { networkName: network, rpcUrl: '' };
     const baseData = await fetchBaseData(spikeDB, config);
     const { pricesMap, decimalsMap, legacyToWrappedMap, wrappedToLegacyMap, swapFeeBps } = baseData;
     console.log(` -> ${pricesMap.size} precios cargados, ${legacyToWrappedMap.size} mapeos legacy.\n`);

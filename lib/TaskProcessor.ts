@@ -11,7 +11,6 @@ const logger = createLogger('scheduled-tasks');
 
 export interface NetworkConfig {
   rpcUrl: string;
-  chainId?: string;
   networkName: string;
 }
 
